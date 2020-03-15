@@ -1,0 +1,94 @@
+09/20/2019 JES
+Created Change Log
+Canceled HOTBAR_MOVE_AND_READD and HOTBAR_SWAP Events. To avoid de-stacking the charges artifact during these events
+Also removed cleanChargesArtifact method in nsa and it's related delay call object, which was called when hotbar swapping
+Removed Inventory Artifact. With future inv swapping mechanics it will not be necessary
+Implemented respawning charges artifact in inv on death via player death player respawn and a few changes to player led
+
+09/21/19 JES
+Updated implemented comments on powers up to 12.
+Note Error Msg's spotted on death when Cause is charity sword. TODO
+
+09/22/2019 JES
+added generate power up to powers class for implemented powers
+removed getMagnitude() from powers.
+    -power magnitude will either be 1 (positive powerID) or 5 (negative PowerID).
+    -Inf (powerID = 0) has no +5 magnitude, it just gives infinite ammo
+    - powerID = -1 (wop of power id) will never be a power up (meaning -1 is ammo regen +5 in this context)
+
+
+TODO:
+powerup spawner:
+overloaded:
+takes either a location to spawn in world
+or
+an entity to spawn a powerup in inv
+
+add command to utilize spawner
+
+09/23/2019 JES
+implemented spawnPowerupcommand (bugged atm)
+added the toggleMobsDropPowerUp command (unimplemented)
+Added add and remove powerups to led (cleared default power up inventory)
+Crouching (inv swap is now bugged)
+added overload spawn powerup methods to nsa (not used atm)
+
+09/24/2019 JES
+
+FIXED SpawnPowerupCommand bug
+Modified (fixed bugs) in update powerupinv in LED
+Done: Spotted errors on load/ reload when no wop is in inv
+TODO: implement a method to save powerup inv inbetween reloads
+Done: Implement throwing away/removing powerups from inv
+TODO: remove banner info from "flavor text" area on powerups, possibly replace it with relavant info
+Done: restrict picked up powerups to powerup inventory only
+Done: restrict powerup inv swap to happen only if wop is held and active item
+
+09/25/2019
+Implemented removing powerups from powerup inv
+Removed inv artifact logic from dropitem in nsa
+Implement powerups going into powerup inventory only via PickupItemEvent
+DONE: CROUCHING DESYNCS CHARGES ARTIFACT
+
+09/26/2019
+Converted Project from spigot to paper
+Update WOP.isWOp() to handle null customName Strings
+Fixed LivingEntityData.inventoryIsSwapped (they were swapped, ironic right?)
+Implemented Swapping to powerup inventory only when wop is equipped
+Updated Wop.getPowerLevel() to handle null customNames, fixing NSA.initPlayer() on reload when no wop is equipped
+
+09/30/2019
+Bug fixes to dropping/picking up powers ups
+
+10/03/2019
+begin conversion over to object oriented design using hashmapping
+much will be like the current playerdata object, where auxiliary data is stored in a data the is keyed to the uuid
+
+01/13/2020
+wop rm (remove all) needs to be debugged. Looks like an exception is hit (removes wop in hand and displays syntax)
+wop X -Y spawns wop with no ammo - +Y works fine (all neg wops = no ammo if just x is used)
+added healing power to wopData
+no ammo bug fixed itself?
+fixed wop rm
+
+01/15/2020
+fixed bugs with ammo regen wops
+timer not firing b/c wop.entityisplayer no set when creating wop (wopdata needed to use method rather then directly setting the entity
+fixed ammo regen not firing on pickup
+fixed neg regen wop showing up with no ammo (check was setting to 0 on first regen)
+fixed neg regen not going all the way to 0 ammo
+
+01/16/2020
+DONE: non entity damage does not start hp regen timer
+fixed hp regen errors (powers array was not large enough)
+fixed damage (was never set to event damage so was never applied lol)
+tested up to protection
+
+
+fixed poison (temporarily)
+TODO: select Generated wop should have (weaponlevel + 1)/2 instead of the weaponlevel
+TODO: negative toxic level
+
+03/15/2020
+fixed non entity damage not starting hp regen timer
+applied resistances to non entity damage

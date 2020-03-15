@@ -1,0 +1,18 @@
+name: WeaponsOfPower
+version: ${project.version}
+main: labs.madskwerl.WeaponsOfPower.WeaponsOfPower
+api-version: 1.13
+authors: [Skwerl, Migs]
+description: Like taking a frying pan to an arms race
+
+
+commands:
+  WOP:
+    description: Get a WOP
+    usage: /WOP
+  KIT:
+    description: Get Charges Artifacts
+    usage: /KIT
+  PU:
+    description: Get a Powerup
+    usage: /PU
